@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maintenance KSAO Navigator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Tool navigation">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">M@S</span>
+          <div>
+            <h1>Maintenance KSAO Navigator</h1>
+            <p>Hiring and capability guidance</p>
+          </div>
+        </div>
+
+        <nav class="nav-stack" aria-label="Workflows">
+          <button class="nav-item is-active" type="button" data-view="hiring">
+            <span aria-hidden="true">+</span>
+            Hiring blueprint
+          </button>
+          <button class="nav-item" type="button" data-view="capability">
+            <span aria-hidden="true">#</span>
+            Capability builder
+          </button>
+          <button class="nav-item" type="button" data-view="library">
+            <span aria-hidden="true">?</span>
+            KSAO library
+          </button>
+        </nav>
+
+        <div class="source-box">
+          <span>Source</span>
+          <strong id="sourceName">Workbook</strong>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <section class="toolbar" aria-label="Dataset overview">
+          <div class="metric">
+            <span id="ksaoCount">0</span>
+            <p>KSAOs</p>
+          </div>
+          <div class="metric">
+            <span id="capabilityCount">0</span>
+            <p>Capabilities</p>
+          </div>
+          <div class="metric">
+            <span>4</span>
+            <p>Roles</p>
+          </div>
+          <div class="metric">
+            <span>2</span>
+            <p>Sectors</p>
+          </div>
+        </section>
+
+        <section class="view is-active" id="hiringView" aria-labelledby="hiringTitle">
+          <div class="view-header">
+            <div>
+              <p class="eyebrow">Angle 1</p>
+              <h2 id="hiringTitle">Start from a hiring need</h2>
+            </div>
+            <button class="icon-button" id="copyHiring" type="button" title="Copy blueprint" aria-label="Copy blueprint">Copy</button>
+          </div>
+
+          <div class="two-column">
+            <section class="panel controls-panel" aria-label="Hiring inputs">
+              <h3>Specify the position</h3>
+              <label class="field-label">Role</label>
+              <div class="segmented" id="roleSelector"></div>
+
+              <label class="field-label">Sector</label>
+              <div class="segmented" id="sectorSelector"></div>
+
+              <label class="field-label" for="hiringCapability">Capability emphasis</label>
+              <select id="hiringCapability"></select>
+
+              <label class="field-label">KSAO types</label>
+              <div class="checkbox-grid" id="hiringTypes"></div>
+
+              <label class="field-label" for="hiringSearch">Search within recommendations</label>
+              <input id="hiringSearch" type="search" placeholder="Filter KSAOs, definitions, examples..." />
+
+              <div class="inline-actions">
+                <button class="secondary-button" id="selectAllHiring" type="button">Select all</button>
+                <button class="secondary-button" id="clearHiring" type="button">Clear</button>
+              </div>
+            </section>
+
+            <section class="panel results-panel" aria-label="Hiring recommendations">
+              <div class="panel-title-row">
+                <h3>Recommended KSAOs</h3>
+                <span class="pill" id="hiringResultCount">0 selected</span>
+              </div>
+              <div id="hiringList" class="ksao-list"></div>
+            </section>
+          </div>
+
+          <section class="blueprint" aria-label="Workplace-ad blueprint">
+            <div class="panel-title-row">
+              <h3>Workplace-ad blueprint</h3>
+              <button class="secondary-button" id="printHiring" type="button">Print</button>
+            </div>
+            <div id="hiringBlueprint" class="blueprint-content"></div>
+          </section>
+        </section>
+
+        <section class="view" id="capabilityView" aria-labelledby="capabilityTitle">
+          <div class="view-header">
+            <div>
+              <p class="eyebrow">Angle 2</p>
+              <h2 id="capabilityTitle">Start from a capability need</h2>
+            </div>
+            <button class="icon-button" id="copyCapability" type="button" title="Copy capability focus" aria-label="Copy capability focus">Copy</button>
+          </div>
+
+          <div class="capability-layout">
+            <section class="panel controls-panel" aria-label="Capability inputs">
+              <h3>Choose the target</h3>
+              <label class="field-label">Sector</label>
+              <div class="segmented" id="capabilitySectorSelector"></div>
+
+              <label class="field-label">Capability family</label>
+              <div class="segmented" id="capabilityFamilySelector">
+                <button class="is-active" type="button" data-family="All">All</button>
+                <button type="button" data-family="Operational">Operational</button>
+                <button type="button" data-family="Dynamic">Dynamic</button>
+              </div>
+
+              <label class="field-label">Capabilities to strengthen</label>
+              <div id="capabilityPicker" class="capability-picker"></div>
+            </section>
+
+            <section class="panel role-panel" aria-label="Role focus">
+              <div class="panel-title-row">
+                <h3>Role focus</h3>
+                <span class="pill" id="capabilityKsaosCount">0 KSAOs</span>
+              </div>
+              <div id="roleFocus" class="role-focus"></div>
+            </section>
+          </div>
+
+          <section class="blueprint" aria-label="Capability guidance">
+            <div class="panel-title-row">
+              <h3>Capability guidance</h3>
+              <span class="pill" id="capabilitySelectionCount">0 selected</span>
+            </div>
+            <div id="capabilityBlueprint" class="blueprint-content"></div>
+          </section>
+        </section>
+
+        <section class="view" id="libraryView" aria-labelledby="libraryTitle">
+          <div class="view-header">
+            <div>
+              <p class="eyebrow">Reference</p>
+              <h2 id="libraryTitle">Browse the KSAO library</h2>
+            </div>
+          </div>
+          <section class="panel">
+            <div class="library-controls">
+              <input id="librarySearch" type="search" placeholder="Search the full library..." />
+              <select id="libraryType"></select>
+              <select id="libraryRole"></select>
+              <select id="librarySector"></select>
+            </div>
+            <div id="libraryList" class="ksao-list library-list"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
